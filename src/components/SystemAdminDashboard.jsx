@@ -1,5 +1,6 @@
 import React from "react";
 import AdminDashboard from "./AdminDashboard";
+import PromoteAdmin from "./System Admin/PromoteToAdmin";
 
 const SystemAdminPanel = () => {
   return (
@@ -13,9 +14,10 @@ const SystemAdminPanel = () => {
 
         {/* Promote to Admin */}
         <section className="p-4 border rounded-md bg-white shadow-sm">
-          <h3 className="text-lg font-medium mb-2">Promote to Admin</h3>
-          <p>Assign admin role to a user.</p>
-        </section>
+            <h3 className="text-lg font-medium mb-2">Promote to Moderator</h3>
+            <p>Assign moderator role to a user.</p>
+            <PromoteAdmin/>
+          </section>
       </div>
     </div>
   );

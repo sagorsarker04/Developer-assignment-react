@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-
+import ResendVerificationButton from "./Utlis/ResendVerificationButton";
 const Register = () => {
   const [formData, setFormData] = useState({
     username: "",
@@ -111,6 +111,8 @@ const Register = () => {
         >
           Register
         </button>
+
+        <ResendVerificationButton/>
       </form>
     </div>
   );

@@ -1,25 +1,33 @@
 import React from "react";
 import UserDashboard from "./UserDashboard";
+import AllUsersButton from "./Moderator/AllUserButton";
+import DeleteUserSection from "./Moderator/DeleteUserButton";
 
 const ModeratorDashboard = () => {
   return (
-    <div>
+    <div className="min-h-screen bg-gray-50 p-6">
       {/* UserDashboard Features */}
       <UserDashboard />
 
       {/* Moderator Specific Features */}
-      <div className="space-y-6 p-4 bg-gray-50 rounded-md shadow-sm mt-8">
-
-        {/* See Any Specific User */}
-        <section className="p-4 border rounded-md bg-white shadow-sm">
-          <h3 className="text-lg font-medium mb-2">See Any Specific User</h3>
-          <p>Search and view details of any user in the system.</p>
+      <div className="max-w-6xl mx-auto mt-10 grid grid-cols-1 md:grid-cols-2 gap-8">
+        {/* View All Users Card */}
+        <section className="bg-white p-6 rounded-lg shadow-md border border-gray-200 flex flex-col">
+          <h3 className="text-2xl font-semibold mb-4 text-gray-900">
+            View All Users
+          </h3>
+          <p className="text-gray-600 flex-grow mb-6">
+            Here you can see all registered users and delete user accounts if necessary.
+          </p>
+          <AllUsersButton />
         </section>
 
-        {/* Delete Any User */}
-        <section className="p-4 border rounded-md bg-white shadow-sm">
-          <h3 className="text-lg font-medium mb-2">Delete Any User</h3>
-          <p>Delete user accounts if necessary.</p>
+        {/* Delete User Card */}
+        <section className="bg-white p-6 rounded-lg shadow-md border border-gray-200 flex flex-col">
+          <h3 className="text-2xl font-semibold mb-6 text-gray-900">
+            Delete User Account
+          </h3>
+          <DeleteUserSection />
         </section>
       </div>
     </div>

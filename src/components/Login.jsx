@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import ResendVerificationButton from './Utlis/ResendVerificationButton';
 
 const Login = () => {
   const navigate = useNavigate();
@@ -91,6 +92,7 @@ const Login = () => {
           >
             {loading ? 'Logging in...' : 'Login'}
           </button>
+          <ResendVerificationButton/>
         </form>
       </div>
     </div>

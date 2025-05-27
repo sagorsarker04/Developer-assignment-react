@@ -14,7 +14,7 @@ const DeleteRequestSection = () => {
     }
 
     fetch(`http://localhost:8080/api/v1/users/${auth.user.id}`, {
-      method: "POST", // or PUT if that's what your backend expects
+      method: "POST",
       credentials: "include",
     })
       .then((res) => {
