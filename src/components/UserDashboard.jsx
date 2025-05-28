@@ -2,6 +2,7 @@ import React from "react";
 import ViewProfileButton from './ViewProfileButton';
 import SelfUpdateButton from "./SelfUpdateButton";
 import DeleteRequestSection from "./DeleteRequestSection";
+import ResetPassowrd from "./User/ResetPassword";
 
 const UserDashboard = () => {
   return (
@@ -29,6 +30,7 @@ const UserDashboard = () => {
         <section className="p-4 border rounded-md bg-white shadow-sm">
           <h3 className="text-lg font-medium mb-2">Password Reset</h3>
           <p>Change your password securely.</p>
+          <ResetPassowrd/>
         </section>
       </div>
     </div>

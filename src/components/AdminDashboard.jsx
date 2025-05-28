@@ -9,6 +9,7 @@ import GetRoleDetails from "./Admin/GetRoleDetails";
 import CreateRoleForm from "./Admin/CreateRoleForm";
 import UpdateRole from "./Admin/UpdateRole";
 import DeleteRole from "./Admin/DeleteRole";
+import GetPermissionDetails from "./Admin/GetPermissionDetails";
 
 
 const AdminDashboard = () => {
@@ -29,6 +30,13 @@ const AdminDashboard = () => {
             <h3 className="text-lg font-medium mb-2">Promote to Moderator</h3>
             <p>Assign moderator role to a user.</p>
             <PromoteModerator />
+          </section>
+
+          {/* Promote to Moderator */}
+          <section className="p-4 border rounded-md bg-white shadow-sm">
+            <h3 className="text-lg font-medium mb-2">Update any user</h3>
+            <p>Update any user.</p>
+
           </section>
 
 
@@ -63,33 +71,45 @@ const AdminDashboard = () => {
           <section className="p-4 border rounded-md bg-white shadow-sm">
             <h3 className="text-lg font-medium mb-2">Update Role</h3>
             <p>Modify an existing role’s details.</p>
-            <UpdateRole/>
+            <UpdateRole />
           </section>
 
           {/* Delete Role */}
           <section className="p-4 border rounded-md bg-white shadow-sm">
             <h3 className="text-lg font-medium mb-2">Delete Role</h3>
             <p>Remove a role from the system.</p>
-          <DeleteRole/>
+            <DeleteRole />
           </section>
 
           {/* List All Permissions */}
           <section className="p-4 border rounded-md bg-white shadow-sm">
             <h3 className="text-lg font-medium mb-2">List All Permissions</h3>
             <p>View all permissions available.</p>
+            <button
+              onClick={() => navigate("/permissions")}
+              className="mt-2 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-700"
+            >
+              View All Permissions
+            </button>
           </section>
 
           {/* Get Specific Permission Details */}
           <section className="p-4 border rounded-md bg-white shadow-sm">
-            <h3 className="text-lg font-medium mb-2">Get Permission Details</h3>
-            <p>Retrieve details of a specific permission.</p>
+            <p>View specific Permission.</p>
+            <GetPermissionDetails />
           </section>
 
-          {/* Create Permission */}
           <section className="p-4 border rounded-md bg-white shadow-sm">
-            <h3 className="text-lg font-medium mb-2">Create Permission</h3>
-            <p>Add a new permission to the system.</p>
+            <h3 className="text-lg font-medium mb-2">Create Permisson</h3>
+            
+            <button
+              onClick={() => navigate("/permission-create")}
+              className="mt-2 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-700"
+            >
+              Create Permission
+            </button>
           </section>
+
         </div>
       </div>
     </div>
