@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import Navbar from "../Utlis/Navbar";
 
 const AllUsers = () => {
   const [users, setUsers] = useState([]);
@@ -28,62 +29,67 @@ const AllUsers = () => {
   }, []);
 
   return (
-    <div className="p-6 max-w-7xl mx-auto">
-      <h2 className="text-3xl font-bold mb-6 text-gray-800">All Users</h2>
-      {error && <p className="text-red-500 mb-4">{error}</p>}
+    <>
+      <Navbar />
+      <div className="p-6 max-w-7xl mx-auto">
+        <h2 className="text-3xl font-bold mb-6 text-gray-800">All Users</h2>
 
-      <div className="overflow-x-auto">
-        <table className="min-w-full border border-gray-300 rounded-lg overflow-hidden shadow-sm">
-          <thead className="bg-gray-100">
-            <tr>
-              <th className="p-3 border">Username</th>
-              <th className="p-3 border">Email</th>
-              <th className="p-3 border">First Name</th>
-              <th className="p-3 border">Last Name</th>
-              <th className="p-3 border">User Type</th>
-              <th className="p-3 border">Verified</th>
-              <th className="p-3 border">Created At</th>
-              <th className="p-3 border">Updated At</th>
-            </tr>
-          </thead>
-          <tbody>
-            {users.length > 0 ? (
-              users.map((user) => (
-                <tr key={user.id} className="hover:bg-gray-50 text-center">
-                  <td className="p-3 border">{user.username}</td>
-                  <td className="p-3 border">{user.email}</td>
-                  <td className="p-3 border">{user.first_name}</td>
-                  <td className="p-3 border">{user.last_name}</td>
-                  <td className="p-3 border capitalize">{user.user_type}</td>
-                  <td className="p-3 border">
-                    {user.email_verified ? (
-                      <span className="text-green-600 font-semibold">Yes</span>
-                    ) : (
-                      <span className="text-red-600 font-semibold">No</span>
-                    )}
-                  </td>
-                  <td className="p-3 border text-sm text-gray-600">
-                    {new Date(user.created_at).toLocaleString()}
-                  </td>
-                  <td className="p-3 border text-sm text-gray-600">
-                    {new Date(user.updated_at).toLocaleString()}
-                  </td>
-                  <td className="p-3 border">
-                    
+        {error && (
+          <div className="mb-4 rounded border border-red-400 bg-red-50 p-3 text-red-700">
+            {error}
+          </div>
+        )}
+
+        <div className="overflow-x-auto">
+          <table className="min-w-full border border-gray-300 rounded-lg overflow-hidden shadow-sm">
+            <thead className="bg-gray-100">
+              <tr>
+                <th className="p-3 border">Username</th>
+                <th className="p-3 border">Email</th>
+                <th className="p-3 border">First Name</th>
+                <th className="p-3 border">Last Name</th>
+                <th className="p-3 border">User Type</th>
+                <th className="p-3 border">Verified</th>
+                <th className="p-3 border">Created At</th>
+                <th className="p-3 border">Updated At</th>
+              </tr>
+            </thead>
+            <tbody>
+              {users.length > 0 ? (
+                users.map((user) => (
+                  <tr key={user.id} className="hover:bg-gray-50 text-center">
+                    <td className="p-3 border">{user.username}</td>
+                    <td className="p-3 border">{user.email}</td>
+                    <td className="p-3 border">{user.first_name}</td>
+                    <td className="p-3 border">{user.last_name}</td>
+                    <td className="p-3 border capitalize">{user.user_type}</td>
+                    <td className="p-3 border">
+                      {user.email_verified ? (
+                        <span className="text-green-600 font-semibold">Yes</span>
+                      ) : (
+                        <span className="text-red-600 font-semibold">No</span>
+                      )}
+                    </td>
+                    <td className="p-3 border text-sm text-gray-600">
+                      {new Date(user.created_at).toLocaleString()}
+                    </td>
+                    <td className="p-3 border text-sm text-gray-600">
+                      {new Date(user.updated_at).toLocaleString()}
+                    </td>
+                  </tr>
+                ))
+              ) : (
+                <tr>
+                  <td colSpan="8" className="text-center p-4 text-gray-600">
+                    No users found.
                   </td>
                 </tr>
-              ))
-            ) : (
-              <tr>
-                <td colSpan="9" className="text-center p-4">
-                  No users found.
-                </td>
-              </tr>
-            )}
-          </tbody>
-        </table>
+              )}
+            </tbody>
+          </table>
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 

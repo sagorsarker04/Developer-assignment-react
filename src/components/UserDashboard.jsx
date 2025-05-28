@@ -2,7 +2,6 @@ import React from "react";
 import ViewProfileButton from "./ViewProfileButton";
 import SelfUpdateButton from "./SelfUpdateButton";
 import DeleteRequestSection from "./DeleteRequestSection";
-import ResetPassword from "./User/ResetPassword";
 import { useNavigate } from "react-router-dom";
 
 const UserDashboard = () => {

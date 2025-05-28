@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Navbar from "./Utlis/Navbar";
-
+import SelfUpdateButton from "./SelfUpdateButton";
+import DeleteRequestSection from "./DeleteRequestSection";
 const UserProfilePage = () => {
   const user = JSON.parse(localStorage.getItem("auth"));
   const id = user?.user?.id;
@@ -87,11 +88,18 @@ const UserProfilePage = () => {
             <span>{formatDate(userInfo.created_at)}</span>
           </div>
 
-          <div className="flex items-center space-x-2">
+          <div className="flex items-center space-x-2 ">
             <span className="font-medium text-gray-900 w-36">Updated At:</span>
             <span>{formatDate(userInfo.updated_at)}</span>
           </div>
         </div>
+        <div className="mt-4">
+        <SelfUpdateButton />
+        </div>
+        <div className="mt-4">
+        <DeleteRequestSection />
+        </div>
+        
       </main>
     </div>
   );
