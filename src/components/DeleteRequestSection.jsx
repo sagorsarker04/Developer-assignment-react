@@ -1,14 +1,13 @@
 import React, { useState } from "react";
 
-const DeleteRequestSection = () => {
+const DeleteRequestButton = () => {
   const [showConfirm, setShowConfirm] = useState(false);
   const [message, setMessage] = useState("");
   const [error, setError] = useState("");
 
   const handleDeleteRequest = () => {
     const auth = JSON.parse(localStorage.getItem("auth"));
-    console.log(auth.user.id)
-    if (!auth || !auth.user.id) {
+    if (!auth || !auth.user?.id) {
       setError("User not logged in");
       return;
     }
@@ -25,50 +24,47 @@ const DeleteRequestSection = () => {
         setMessage(data.message || "Request submitted");
         setShowConfirm(false);
       })
-      .catch((err) => {
+      .catch(() => {
         setError("Something went wrong");
         setShowConfirm(false);
       });
   };
 
   return (
-    <section className="p-4 border rounded-md bg-white shadow-sm">
-      <h3 className="text-lg font-medium mb-2">Delete Request</h3>
-      <p className="mb-2">Request account deletion. This will require admin approval.</p>
-
-      {message && <p className="text-green-600">{message}</p>}
-      {error && <p className="text-red-600">{error}</p>}
+    <div>
+      {message && <p className="text-green-600 mb-2">{message}</p>}
+      {error && <p className="text-red-600 mb-2">{error}</p>}
 
       {!showConfirm ? (
         <button
           onClick={() => setShowConfirm(true)}
-          className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600"
+          className="w-full py-2 px-4 bg-red-600 text-white rounded hover:bg-red-700 transition"
         >
           Request Delete
         </button>
       ) : (
-        <div className="mt-4 bg-gray-50 p-4 rounded border">
-          <p className="mb-2 font-medium text-red-600">
+        <div className="mt-4 bg-gray-100 p-4 rounded border">
+          <p className="mb-2 font-medium text-red-700">
             Are you sure you want to request account deletion?
           </p>
-          <div className="flex space-x-2">
+          <div className="flex justify-between gap-3">
             <button
               onClick={handleDeleteRequest}
-              className="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700"
+              className="flex-1 py-2 px-4 bg-red-700 text-white rounded hover:bg-red-800 transition"
             >
               Confirm
             </button>
             <button
               onClick={() => setShowConfirm(false)}
-              className="bg-gray-300 text-black px-4 py-2 rounded hover:bg-gray-400"
+              className="flex-1 py-2 px-4 bg-gray-300 text-black rounded hover:bg-gray-400 transition"
             >
               Cancel
             </button>
           </div>
         </div>
       )}
-    </section>
+    </div>
   );
 };
 
-export default DeleteRequestSection;
+export default DeleteRequestButton;

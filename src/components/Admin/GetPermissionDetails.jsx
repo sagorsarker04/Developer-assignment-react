@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 const GetPermissionDetails = () => {
   const [permissions, setPermissions] = useState([]);
   const [selectedPermissionId, setSelectedPermissionId] = useState("");
-  const [error, setError] = useState(null);
+  const [message, setMessage] = useState(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -12,11 +12,15 @@ const GetPermissionDetails = () => {
         const res = await fetch("http://localhost:8080/api/v1/permissions", {
           credentials: "include",
         });
-        if (!res.ok) throw new Error("Failed to fetch permissions");
+
         const data = await res.json();
-        setPermissions(data.data || []);
+        if (res.ok) {
+          setPermissions(Array.isArray(data.data) ? data.data : []);
+        } else {
+          throw new Error(data.message || "Failed to fetch permissions.");
+        }
       } catch (err) {
-        setError(err.message);
+        setMessage({ type: "error", text: err.message });
       } finally {
         setLoading(false);
       }
@@ -30,25 +34,26 @@ const GetPermissionDetails = () => {
   );
 
   return (
-    <section className="p-6 border rounded-md bg-white shadow-sm max-w-3xl mx-auto">
-      <h3 className="text-lg font-medium mb-2">Get Permission Details</h3>
-      <p className="mb-4 text-gray-600">
-        Retrieve details of a specific permission.
-      </p>
+    <section className="p-6 max-w-3xl mx-auto mt-6 bg-white rounded-xl shadow-md space-y-6">
+      <div>
+        <h2 className="text-xl font-semibold text-center">Permission Details</h2>
+        <p className="text-center text-sm text-gray-600">
+          Select a permission from the list to view its details.
+        </p>
+      </div>
 
-      {loading && <p>Loading permissions...</p>}
-      {error && <p className="text-red-600">Error: {error}</p>}
-
-      {!loading && !error && (
+      {loading ? (
+        <p className="text-center text-gray-500">Loading permissions...</p>
+      ) : message ? (
+        <p className="text-center text-red-600">{message.text}</p>
+      ) : (
         <>
           <select
-            className="w-full border border-gray-300 rounded-md px-4 py-2 mb-6 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full border px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
             value={selectedPermissionId}
             onChange={(e) => setSelectedPermissionId(e.target.value)}
           >
-            <option value="" disabled>
-              -- Select a permission --
-            </option>
+            <option value="">-- Select a permission --</option>
             {permissions.map((perm) => (
               <option key={perm.id} value={perm.id}>
                 {perm.name}
@@ -57,11 +62,13 @@ const GetPermissionDetails = () => {
           </select>
 
           {selectedPermission ? (
-            <div className="bg-gray-50 p-4 rounded-md border border-gray-300">
-              <h4 className="text-xl font-semibold mb-2">{selectedPermission.name}</h4>
+            <div className="bg-gray-50 p-5 rounded-lg border space-y-2">
+              <h3 className="text-lg font-semibold text-gray-800">
+                {selectedPermission.name}
+              </h3>
               <p>
                 <strong>Description:</strong>{" "}
-                {selectedPermission.description || "No description"}
+                {selectedPermission.description || "No description provided"}
               </p>
               <p>
                 <strong>Resource:</strong> {selectedPermission.resource}
@@ -79,7 +86,9 @@ const GetPermissionDetails = () => {
               </p>
             </div>
           ) : (
-            <p className="text-gray-500">Please select a permission to see details.</p>
+            <p className="text-center text-gray-500">
+              Please select a permission to see details.
+            </p>
           )}
         </>
       )}

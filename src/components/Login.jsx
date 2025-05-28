@@ -127,6 +127,13 @@ const Login = () => {
             >
               Sign Up
             </button>
+            <button
+              type="button"
+              onClick={() => navigate('/password-reset-request')}
+              className="w-full py-2 mt-2 bg-gray-600 text-white rounded hover:bg-green-700 transition"
+            >
+              Reset Password
+            </button>
 
             <div className="mt-4 text-center">
               <ResendVerificationButton />

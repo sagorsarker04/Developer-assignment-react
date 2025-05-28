@@ -5,20 +5,16 @@ const ViewProfileButton = () => {
   const navigate = useNavigate();
 
   const handleClick = () => {
-    navigate("/profile"); // Redirect to profile page
+    navigate("/profile");
   };
 
   return (
-    <section className="p-4 border rounded-md bg-white shadow-sm">
-      <h3 className="text-lg font-medium mb-2">View My Profile</h3>
-      <p className="mb-2">View your personal details and account information.</p>
-      <button
-        className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
-        onClick={handleClick}
-      >
-        Go to My Profile
-      </button>
-    </section>
+    <button
+      onClick={handleClick}
+      className="w-full py-2 px-4 bg-blue-600 text-white font-medium rounded-md hover:bg-blue-700 transition"
+    >
+      Go to My Profile
+    </button>
   );
 };
 

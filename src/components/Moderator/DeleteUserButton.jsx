@@ -18,8 +18,7 @@ const GoToDeleteUserPage = () => {
         const data = await res.json();
 
         if (res.ok) {
-          // ধরে নিচ্ছি data.data হল ইউজারের array [{id, username}, ...]
-          setUsers(data.data || []);
+          setUsers(data.data ?? []);
         } else {
           throw new Error(data.message || "Failed to fetch users");
         }
@@ -41,35 +40,46 @@ const GoToDeleteUserPage = () => {
     navigate(`/delete-user/${selectedUserId}`);
   };
 
-  if (loading) return <p>Loading users...</p>;
-  if (error) return <p className="text-red-600">Error: {error}</p>;
+  if (loading)
+    return (
+      <section className="max-w-7xl mx-auto mt-8 p-6 bg-white rounded-lg shadow-md border border-gray-200">
+        <p className="text-gray-600">Loading users...</p>
+      </section>
+    );
+
+  if (error)
+    return (
+      <section className="max-w-7xl mx-auto mt-8 p-6 bg-white rounded-lg shadow-md border border-gray-200">
+        <p className="text-red-600">Error: {error}</p>
+      </section>
+    );
 
   return (
-    <div className="max-w-md mx-auto mt-12 p-4 bg-white shadow rounded">
-      <h2 className="text-lg font-semibold mb-3">Delete a User</h2>
+    <section className="max-w-7xl mx-auto mt-8 p-6 bg-white rounded-lg shadow-md border border-gray-200">
+      <h2 className="text-2xl font-semibold mb-6 text-gray-900">Delete a User</h2>
 
-      <div className="flex items-center gap-2">
+      <div className="flex flex-col md:flex-row items-center gap-4">
         <select
           value={selectedUserId}
           onChange={(e) => setSelectedUserId(e.target.value)}
-          className="flex-grow border border-gray-300 px-3 py-2 rounded text-sm focus:outline-none focus:ring-2 focus:ring-red-500"
+          className="flex-grow border border-gray-300 rounded px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-red-500"
         >
           <option value="">Select User</option>
-          {users.map((user) => (
-            <option key={user.id} value={user.id}>
-              {user.username}
+          {users.map(({ id, username }) => (
+            <option key={id} value={id}>
+              {username}
             </option>
           ))}
         </select>
 
         <button
           onClick={handleNavigate}
-          className="bg-red-600 text-white px-3 py-2 rounded hover:bg-red-700 whitespace-nowrap text-sm"
+          className="bg-red-600 text-white px-5 py-2 rounded hover:bg-red-700 transition-colors text-sm whitespace-nowrap"
         >
           Delete
         </button>
       </div>
-    </div>
+    </section>
   );
 };
 

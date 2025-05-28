@@ -1,39 +1,58 @@
 import React from "react";
-import ViewProfileButton from './ViewProfileButton';
+import ViewProfileButton from "./ViewProfileButton";
 import SelfUpdateButton from "./SelfUpdateButton";
 import DeleteRequestSection from "./DeleteRequestSection";
-import ResetPassowrd from "./User/ResetPassword";
+import ResetPassword from "./User/ResetPassword";
+import { useNavigate } from "react-router-dom";
 
 const UserDashboard = () => {
-  return (
-    <div className="p-4 bg-gray-50 rounded-md shadow-sm">
-      <h2 className="text-2xl font-semibold mb-6">Dashboard</h2>
+  const navigate = useNavigate();
 
-      {/* Grid container with 2 columns and gap */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        {/* View My Profile */}
-        <div className="bg-white p-4 rounded-md shadow-sm">
-          <ViewProfileButton />
+  return (
+    <section className="max-w-7xl mx-auto p-8 mt-10 bg-white rounded-2xl shadow-lg">
+      <h2 className="text-3xl font-bold text-gray-800 mb-10">User Dashboard</h2>
+
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8">
+        {/* View Profile */}
+        <div className="bg-gray-50 p-6 rounded-xl shadow flex flex-col justify-between">
+          <h3 className="text-xl font-semibold text-gray-900 mb-4">View My Profile</h3>
+          <p className="text-gray-600 mb-6">See your profile information in detail.</p>
+          <div>
+            <ViewProfileButton />
+          </div>
         </div>
 
         {/* Self Update */}
-        <div className="bg-white p-4 rounded-md shadow-sm">
-          <SelfUpdateButton />
+        <div className="bg-gray-50 p-6 rounded-xl shadow flex flex-col justify-between">
+          <h3 className="text-xl font-semibold text-gray-900 mb-4">Update My Info</h3>
+          <p className="text-gray-600 mb-6">Edit your personal information securely.</p>
+          <div>
+            <SelfUpdateButton />
+          </div>
         </div>
 
-        {/* Delete Request */}
-        <div className="bg-white p-4 rounded-md shadow-sm">
-          <DeleteRequestSection />
+        {/* Request Account Deletion */}
+        <div className="bg-gray-50 p-6 rounded-xl shadow flex flex-col justify-between">
+          <h3 className="text-xl font-semibold text-gray-900 mb-4">Request Account Deletion</h3>
+          <p className="text-gray-600 mb-6">Submit a request for account deletion.</p>
+          <div>
+            <DeleteRequestSection />
+          </div>
         </div>
 
         {/* Password Reset */}
-        <section className="p-4 border rounded-md bg-white shadow-sm">
-          <h3 className="text-lg font-medium mb-2">Password Reset</h3>
-          <p>Change your password securely.</p>
-          <ResetPassowrd/>
-        </section>
+        <div className="bg-gray-50 p-6 rounded-xl shadow flex flex-col justify-between">
+          <h3 className="text-xl font-semibold text-gray-900 mb-4">Reset Password</h3>
+          <p className="text-gray-600 mb-6">Change your password securely.</p>
+          <button
+            onClick={() => navigate("/password-reset-request")}
+            className="w-full py-2 px-4 bg-blue-600 text-white font-medium rounded-md hover:bg-blue-700 transition"
+          >
+            Reset Password
+          </button>
+        </div>
       </div>
-    </div>
+    </section>
   );
 };
 

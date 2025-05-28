@@ -21,6 +21,7 @@ import DeleteRoleForm from "./components/Admin/DeleteRoleForm";
 import PermissionsList from "./components/Admin/PermissionList";
 import GetPermissionDetails from "./components/Admin/GetPermissionDetails";
 import PermissionCreate from "./components/Admin/CreatePermission";
+import ResetPassword from "./components/User/ResetPassword";
 
 function App() {
   return (
@@ -47,6 +48,7 @@ function App() {
         <Route path="/permissions" element={<PermissionsList />} />
         <Route path="/permission-details" element={<GetPermissionDetails/>} />
         <Route path="/permission-create" element={<PermissionCreate />} />
+        <Route path="/password-reset-request" element={<ResetPassword/>} />
         
 
       </Routes>

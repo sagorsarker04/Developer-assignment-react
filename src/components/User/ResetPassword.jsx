@@ -1,14 +1,16 @@
 import React, { useState } from "react";
 
-const ResetPassowrd = () => {
+const ResetPassword = () => {
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setMessage("");
     setError("");
+    setLoading(true);
 
     try {
       const res = await fetch(
@@ -27,42 +29,54 @@ const ResetPassowrd = () => {
         setError(data.message || "❌ Failed to send reset link.");
       }
     } catch (err) {
-      setError("❌ Server error. Try again later.");
+      setError("No verified user found");
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
-    <div className="mt-4">
-      <form onSubmit={handleSubmit} className="space-y-4">
-        {message && (
-          <div className="rounded border border-green-400 bg-green-50 p-2 text-green-700">
-            {message}
-          </div>
-        )}
-        {error && (
-          <div className="rounded border border-red-400 bg-red-50 p-2 text-red-700">
-            {error}
-          </div>
-        )}
+    <div className="min-h-screen flex items-center justify-center bg-gray-50 px-4">
+      <div className="w-full max-w-sm bg-white p-6 rounded shadow">
+        <h2 className="mb-4 text-center text-xl font-semibold text-gray-800">
+          Reset Password
+        </h2>
+        <form onSubmit={handleSubmit} className="space-y-4">
+          {message && (
+            <div className="rounded border border-green-400 bg-green-50 p-2 text-green-700 text-sm">
+              {message}
+            </div>
+          )}
+          {error && (
+            <div className="rounded border border-red-400 bg-red-50 p-2 text-red-700 text-sm">
+              {error}
+            </div>
+          )}
 
-        <input
-          type="email"
-          placeholder="Your email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-          className="w-full rounded border border-gray-300 px-3 py-2 placeholder-gray-400 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500"
-        />
+          <input
+            type="email"
+            placeholder="Your email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+            className="w-full rounded border border-gray-300 px-3 py-2 placeholder-gray-400 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500"
+          />
 
-        <button
-          type="submit"
-          className="w-full rounded bg-indigo-600 py-2 text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-1"
-        >
-          Send Reset Link
-        </button>
-      </form>
+          <button
+            type="submit"
+            disabled={loading}
+            className={`w-full rounded py-2 text-white transition ${
+              loading
+                ? "bg-indigo-400 cursor-not-allowed"
+                : "bg-indigo-600 hover:bg-indigo-700"
+            }`}
+          >
+            {loading ? "Sending..." : "Send Reset Link"}
+          </button>
+        </form>
+      </div>
     </div>
   );
 };
 
-export default ResetPassowrd;
+export default ResetPassword;
